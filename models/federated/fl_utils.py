@@ -1,5 +1,5 @@
 """
-Federated Learning Utilities for CEdge-XAI.
+Federated Learning Utilities for XAI for IOT Anomaly Detection.
 Handles data partitioning for 3 factory sites (Factory A, Factory B, Factory C),
 parameter serialization/deserialization for Flower, and privacy verification.
 """

@@ -1,1 +1,1 @@
-"""CEdge-XAI Anomaly Detection Models Subpackage."""
+"""XAI for IOT Anomaly Detection Models Subpackage."""

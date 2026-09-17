@@ -9,8 +9,12 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
 cd "${ROOT_DIR}"
 
-if [ -d "cedge_xai_env" ]; then
+if [ -d "xai_env" ]; then
+    PYTHON_EXEC="./xai_env/bin/python"
+elif [ -d "cedge_xai_env" ]; then
     PYTHON_EXEC="./cedge_xai_env/bin/python"
+elif [ -d "venv" ]; then
+    PYTHON_EXEC="./venv/bin/python"
 else
     PYTHON_EXEC="python3"
 fi

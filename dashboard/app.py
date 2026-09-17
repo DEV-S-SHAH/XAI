@@ -1,5 +1,5 @@
 """
-CEdge-XAI: Master Streamlit Dashboard.
+XAI for IOT Anomaly Detection: Master Streamlit Dashboard.
 Interactive Explainable AI Interface for Real-Time IoT Anomaly Detection.
 """
 
@@ -9,14 +9,14 @@ import streamlit as st
 
 # Configure wide layout and page theme
 st.set_page_config(
-    page_title="CEdge-XAI | IoT Anomaly Detection",
+    page_title="XAI for IOT Anomaly Detection",
     page_icon="⚡",
     layout="wide",
     initial_sidebar_state="expanded",
 )
 
 st.sidebar.image("https://img.icons8.com/fluency/96/processor.png", width=64)
-st.sidebar.title("CEdge-XAI Platform")
+st.sidebar.title("XAI for IOT Anomaly Detection")
 st.sidebar.markdown(
     "**Causal, Counterfactual & Edge-Deployable XAI for Real-Time IoT Anomaly Detection**"
 )
@@ -29,7 +29,7 @@ st.sidebar.info(
 )
 
 # Main Landing Page
-st.title("⚡ CEdge-XAI: Thesis Demonstration Platform")
+st.title("⚡ XAI for IOT Anomaly Detection")
 st.subheader(
     "Causal, Counterfactual, and Edge-Deployable Explainable AI for Real-Time IoT Anomaly Detection"
 )
@@ -52,7 +52,7 @@ with col_left:
         1. **Black-Box Opacity**: They flag anomalies without revealing physical root causes or actionable interventions.
         2. **Deployment Bottlenecks**: Deep neural networks are too computationally intensive for resource-constrained edge gateways.
 
-        **CEdge-XAI** resolves these dual challenges by introducing:
+        **XAI for IOT Anomaly Detection** resolves these dual challenges by introducing:
         - **Split-Brain Architecture**: Ultra-fast INT8 ONNX anomaly detection at the edge sensor interface (< 0.2 ms), coupled with deep causal-counterfactual reasoning on an edge server.
         - **Physics-Aware Counterfactual Engine**: Computes exact 'what-if' interventions that identify root causes and generate plain-English engineering explanations.
         - **Tigramite PCMCI Causal Discovery**: Uncovers directed causal propagation networks across physical sensors ($p < 0.01$).

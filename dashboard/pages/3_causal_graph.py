@@ -1,5 +1,5 @@
 """
-Page 4: Causal Discovery & Propagation Network for CEdge-XAI.
+Page 4: Causal Discovery & Propagation Network for XAI for IOT Anomaly Detection.
 Renders interactive Tigramite PCMCI directed causal graphs,
 evaluates edge accuracy vs. physical engineering truth, and traces failure paths.
 """
@@ -12,12 +12,12 @@ import streamlit as st
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 from models.xai.causal_graph import CausalDiscoveryEngine  # noqa: E402
 
-st.set_page_config(page_title="Causal Discovery | CEdge-XAI", layout="wide", page_icon="🕸️")
-st.title("🕸️ CEdge-XAI: Causal Discovery & Fault Propagation")
+st.set_page_config(page_title="Causal Discovery | XAI for IOT Anomaly Detection", layout="wide", page_icon="🕸️")
+st.title("🕸️ XAI for IOT Anomaly Detection: Causal Discovery & Fault Propagation")
 
 st.markdown(
     "Using **Tigramite PCMCI** (Partial Correlation with time lags $\\tau \\in [1, 3]$), "
-    "CEdge-XAI learns the directed physical causality governing cyber-physical CNC machine behavior."
+    "our framework learns the directed physical causality governing cyber-physical CNC machine behavior."
 )
 
 col1, col2, col3, col4 = st.columns(4)

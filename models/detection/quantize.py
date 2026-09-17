@@ -1,5 +1,5 @@
 """
-Model Quantization Engine for CEdge-XAI.
+Model Quantization Engine for XAI for IOT Anomaly Detection.
 Applies dynamic quantization (Float32 -> Int8) to both PyTorch and ONNX models
 to minimize RAM consumption and inference latency on constrained IoT edge hardware.
 """

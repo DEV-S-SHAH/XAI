@@ -1,5 +1,5 @@
 """
-Pydantic Schemas for CEdge-XAI FastAPI REST API.
+Pydantic Schemas for XAI for IOT Anomaly Detection FastAPI REST API.
 """
 
 from typing import List, Optional

@@ -1,5 +1,5 @@
 """
-Page 6: Edge Deployment & Hardware Benchmarking for CEdge-XAI.
+Page 6: Edge Deployment & Hardware Benchmarking for XAI for IOT Anomaly Detection.
 Compares PyTorch FP32 vs ONNX FP32 vs ONNX INT8 runtime execution,
 displays latency distributions, RAM consumption, and hardware recommendations.
 """
@@ -11,11 +11,11 @@ import streamlit as st
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 
-st.set_page_config(page_title="Edge Benchmark | CEdge-XAI", layout="wide", page_icon="⚡")
+st.set_page_config(page_title="Edge Benchmark | XAI for IOT Anomaly Detection", layout="wide", page_icon="⚡")
 st.title("⚡ Edge Runtime Optimization & Hardware Benchmarking")
 
 st.markdown(
-    "To support real-time high-throughput industrial machinery, **CEdge-XAI** exports PyTorch neural networks "
+    "To support real-time high-throughput industrial machinery, our **XAI for IOT Anomaly Detection** framework exports PyTorch neural networks "
     "to **ONNX FP32** and applies **Dynamic INT8 Quantization**, achieving sub-0.2 ms inference."
 )
 

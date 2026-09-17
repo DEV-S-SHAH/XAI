@@ -1,1 +1,1 @@
-"""CEdge-XAI FastAPI API Route Endpoints."""
+"""XAI for IOT Anomaly Detection FastAPI API Route Endpoints."""

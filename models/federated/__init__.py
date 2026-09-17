@@ -1,1 +1,1 @@
-"""CEdge-XAI Federated Learning Subpackage."""
+"""XAI for IOT Anomaly Detection Federated Learning Subpackage."""

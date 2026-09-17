@@ -1,10 +1,10 @@
-# CEdge-XAI: Real-Time Edge-Cloud Anomaly Detection and Root Cause Attribution for Industrial IoT
+# XAI for IOT Anomaly Detection
 
-CEdge-XAI is a production-grade, distributed framework engineered for real-time anomaly detection and physically consistent explainability in Industrial Internet of Things (IIoT) cyber-physical systems. Utilizing a dual-tier "Split-Brain" architecture, CEdge-XAI decouples sub-millisecond anomaly detection on resource-constrained edge microcontrollers (via 8-bit quantized ONNX models) from compute-intensive root-cause explanation and causal attribution executed on edge servers. The platform integrates gradient-based counterfactual search with physics-informed bounds, constraint-based causal DAG discovery via Tigramite PCMCI, and privacy-preserving Federated Learning (Flower FedAvg) across factory edge nodes, achieving high-fidelity anomaly attribution while keeping raw operational telemetry strictly on-premises.
+XAI for IOT Anomaly Detection is a production-grade, distributed framework engineered for real-time anomaly detection and physically consistent explainability in Industrial Internet of Things (IIoT) cyber-physical systems. Utilizing a dual-tier "Split-Brain" architecture, the framework decouples sub-millisecond anomaly detection on resource-constrained edge microcontrollers (via 8-bit quantized ONNX models) from compute-intensive root-cause explanation and causal attribution executed on edge servers. The platform integrates gradient-based counterfactual search with physics-informed bounds, constraint-based causal DAG discovery via Tigramite PCMCI, and privacy-preserving Federated Learning (Flower FedAvg) across factory edge nodes, achieving high-fidelity anomaly attribution while keeping raw operational telemetry strictly on-premises.
 
 ## Architecture
 
-![CEdge-XAI Split-Brain Architecture](paper_assets/figures/architecture.png)
+![XAI for IOT Anomaly Detection Architecture](paper_assets/figures/architecture.png)
 
 ## Tech Stack
 
@@ -23,7 +23,7 @@ CEdge-XAI is a production-grade, distributed framework engineered for real-time 
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/devshah16/CEdge-XAI.git && cd CEdge-XAI
+git clone https://github.com/DEV-S-SHAH/XAI.git && cd XAI
 
 # 2. Install dependencies
 pip install -r requirements.txt
@@ -35,7 +35,7 @@ uvicorn api.main:app --port 8000
 ## Project Structure
 
 ```text
-CEdge-XAI/
+XAI/
 ├── README.md
 ├── requirements.txt
 ├── Dockerfile
@@ -160,8 +160,8 @@ Performance benchmark on the 10-sensor IoT telemetry benchmark test set:
 ## Citation
 
 ```bibtex
-@article{shah2026cedgexai,
-  title={CEdge-XAI: Real-Time Edge-Cloud Anomaly Detection and Root Cause Attribution for Industrial IoT},
+@article{shah2026xai_iot,
+  title={XAI for IOT Anomaly Detection},
   author={Shah, Dev and Collaborators},
   journal={IEEE Transactions on Industrial Informatics},
   year={2026},

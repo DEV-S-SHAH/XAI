@@ -1,5 +1,5 @@
 """
-Explanation Endpoint for CEdge-XAI FastAPI Backend.
+Explanation Endpoint for XAI for IOT Anomaly Detection FastAPI Backend.
 Performs counterfactual XAI and causal root cause analysis.
 """
 

@@ -1,1 +1,1 @@
-"""CEdge-XAI Automated Test Suite Package."""
+"""XAI for IOT Anomaly Detection Automated Test Suite Package."""

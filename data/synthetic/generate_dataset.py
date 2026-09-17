@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Synthetic IoT Dataset Generator for CEdge-XAI (10 Sensors, 3 Days).
+Synthetic IoT Dataset Generator for XAI for IOT Anomaly Detection (10 Sensors, 3 Days).
 Encodes 5-layer causal hierarchy and 5 industrial failure scenarios (A1 - A5).
 Generates 4320 rows and publication-quality EDA overview plot.
 """

@@ -1,5 +1,5 @@
 """
-Unit Tests for Data Loader and Preprocessing Pipeline in CEdge-XAI.
+Unit Tests for Data Loader and Preprocessing Pipeline in XAI for IOT Anomaly Detection.
 Tests sliding window generation, 10-sensor validation, scaling fidelity, and normal isolation.
 """
 

@@ -4,4 +4,4 @@ Exp 2: + Clamping XAI,Baseline + Physics Clamping,0.965,1.31,0.485,92.4,No
 Exp 3: + Gradient XAI,Baseline + Gradient Descent CF,0.965,4.85,0.485,95.8,No
 Exp 4: + Causal Filter,Baseline + Tigramite Causal Pruning,0.965,1.35,0.49,98.6,No
 Exp 5: + Federated,Baseline + FedAvg (3 Edge Nodes),0.958,1.25,0.485,98.6,Yes
-Exp 6: Full CEdge-XAI,All Modules + ONNX INT8 Edge Quant,0.957,0.198,0.589,98.6,Yes
+Exp 6: Full XAI for IOT Anomaly Detection,All Modules + ONNX INT8 Edge Quant,0.957,0.198,0.589,98.6,Yes

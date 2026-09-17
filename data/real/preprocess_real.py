@@ -1,5 +1,5 @@
 """
-Real-World Dataset Validation Pipeline for CEdge-XAI.
+Real-World Dataset Validation Pipeline for XAI for IOT Anomaly Detection.
 Uses the UCI AI4I 2020 Predictive Maintenance Dataset (10,000 instances).
 Evaluates transferability and robustness of the LSTM-Autoencoder architecture
 on real industrial CNC machine failure telemetry.

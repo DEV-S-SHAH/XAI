@@ -1,5 +1,5 @@
 """
-FastAPI Main Application for CEdge-XAI.
+FastAPI Main Application for XAI for IOT Anomaly Detection.
 Provides RESTful APIs for real-time edge inference, counterfactual explainability, and causal root cause diagnosis.
 """
 
@@ -15,7 +15,7 @@ from api.routes.explain import router as explain_router  # noqa: E402
 from api.schemas import ModelInfoResponse  # noqa: E402
 
 app = FastAPI(
-    title="CEdge-XAI: Edge-Deployable Explainable AI for Industrial IoT",
+    title="XAI for IOT Anomaly Detection",
     description="Real-Time Anomaly Detection, Counterfactual Explanations, and Causal Discovery for Cyber-Physical Systems.",
     version="1.0.0",
 )
@@ -85,7 +85,7 @@ async def model_info():
     )
 
     return ModelInfoResponse(
-        model_name="CEdge-XAI LSTM-Autoencoder",
+        model_name="XAI for IOT Anomaly Detection LSTM-Autoencoder",
         architecture="2-Layer Encoder-Decoder LSTM",
         num_sensors=len(sensor_names),
         sensor_names=sensor_names,

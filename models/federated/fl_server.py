@@ -1,5 +1,5 @@
 """
-Federated Learning Server for CEdge-XAI.
+Federated Learning Server for XAI for IOT Anomaly Detection.
 Orchestrates FedAvg across 3 factory clients (Factory A, Factory B, Factory C)
 for 5 rounds of privacy-preserving decentralized anomaly detection.
 Saves global aggregated weights and logs convergence metrics.

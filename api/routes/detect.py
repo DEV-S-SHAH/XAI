@@ -1,5 +1,5 @@
 """
-Detection Endpoint for CEdge-XAI FastAPI Backend.
+Detection Endpoint for XAI for IOT Anomaly Detection FastAPI Backend.
 Performs real-time window anomaly detection using optimized model / ONNX runtime.
 """
 

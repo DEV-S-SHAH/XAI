@@ -1,5 +1,5 @@
 """
-Edge Deployment Benchmarking for CEdge-XAI.
+Edge Deployment Benchmarking for XAI for IOT Anomaly Detection.
 Empirically benchmarks PyTorch FP32, ONNX FP32, and ONNX INT8 models
 across Storage Footprint (MB), Single-Sample Inference Latency (ms), and Process RAM Usage (MB).
 Conducts 1000 inference iterations using psutil and time.perf_counter.
@@ -133,7 +133,7 @@ def run_edge_benchmark(
     df = pd.DataFrame(results)
     sep = "=" * 70
     print(
-        f"\n{sep}\nCEdge-XAI: EDGE HARDWARE DEPLOYMENT BENCHMARK\n{sep}\n{df.to_string(index=False)}\n{sep}\n"
+        f"\n{sep}\nXAI for IOT Anomaly Detection: EDGE HARDWARE DEPLOYMENT BENCHMARK\n{sep}\n{df.to_string(index=False)}\n{sep}\n"
     )
 
     # Save CSV
@@ -279,7 +279,7 @@ def render_split_brain_diagram(
     ax.set_xlim(0, 1)
     ax.set_ylim(0.1, 0.95)
     ax.axis("off")
-    plt.title("CEdge-XAI: Split-Brain IoT Edge Architecture", fontweight="bold", fontsize=13)
+    plt.title("XAI for IOT Anomaly Detection: Split-Brain IoT Edge Architecture", fontweight="bold", fontsize=13)
     plt.tight_layout()
     plt.savefig(save_path, dpi=300)
     plt.close()

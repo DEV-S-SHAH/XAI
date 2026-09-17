@@ -9,14 +9,18 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
 cd "${ROOT_DIR}"
 
-if [ -d "cedge_xai_env" ]; then
+if [ -d "xai_env" ]; then
+    PYTHON_EXEC="./xai_env/bin/python"
+elif [ -d "cedge_xai_env" ]; then
     PYTHON_EXEC="./cedge_xai_env/bin/python"
+elif [ -d "venv" ]; then
+    PYTHON_EXEC="./venv/bin/python"
 else
     PYTHON_EXEC="python3"
 fi
 
 echo "=========================================================="
-echo "Starting CEdge-XAI Full Training & Discovery Pipeline"
+echo "Starting XAI for IOT Anomaly Detection Full Training & Discovery Pipeline"
 echo "=========================================================="
 
 echo "[1/7] Generating Synthetic IoT Telemetry Dataset (4320 rows, 10 features)..."
@@ -42,7 +46,7 @@ echo "[7/7] Benchmarking Edge Runtimes (1000 iterations)..."
 ${PYTHON_EXEC} experiments/edge_benchmark.py
 
 echo "=========================================================="
-echo "CEdge-XAI Training Pipeline Complete!"
+echo "XAI for IOT Anomaly Detection Training Pipeline Complete!"
 echo "Checkpoints saved in models_saved/checkpoints/"
 echo "Assets saved in paper_assets/tables/ and paper_assets/figures/"
 echo "=========================================================="

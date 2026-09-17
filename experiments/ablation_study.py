@@ -1,12 +1,12 @@
 """
-Ablation Study Framework for CEdge-XAI.
+Ablation Study Framework for XAI for IOT Anomaly Detection.
 Systematically evaluates the incremental contributions of each modular component:
 - Exp 1: Baseline LSTM-AE (Centralized, no XAI, FP32)
 - Exp 2: + Physics Clamping Counterfactuals
 - Exp 3: + Gradient Descent Counterfactuals
 - Exp 4: + Tigramite Causal Discovery Filtering
 - Exp 5: + Privacy-Preserving Federated Learning (FedAvg 3 Sites)
-- Exp 6: + Edge Deployment (ONNX INT8) [Full CEdge-XAI Framework]
+- Exp 6: + Edge Deployment (ONNX INT8) [Full XAI for IOT Anomaly Detection Framework]
 
 Generates Table 7 (ablation_study.csv) and Figure 10 (ablation_study.png).
 """
@@ -71,7 +71,7 @@ def run_ablation_study() -> pd.DataFrame:
             "Privacy Preserved": "Yes",
         },
         {
-            "Experiment": "Exp 6: Full CEdge-XAI",
+            "Experiment": "Exp 6: Full XAI for IOT Anomaly Detection",
             "Components": "All Modules + ONNX INT8 Edge Quant",
             "F1-Score": 0.957,
             "Latency (ms)": 0.198,
@@ -133,7 +133,7 @@ def run_ablation_study() -> pd.DataFrame:
         axes[2].text(i, v * 1.15, f"{v:.3f}ms", ha="center", fontweight="bold", fontsize=9)
 
     plt.suptitle(
-        "CEdge-XAI Component-Wise Ablation Study (Exp 1 - 6)",
+        "XAI for IOT Anomaly Detection Component-Wise Ablation Study (Exp 1 - 6)",
         fontsize=13,
         fontweight="bold",
         y=1.03,

@@ -1,7 +1,7 @@
 """
-Page 5: Federated Learning Monitor for CEdge-XAI.
-Monitors 3 distributed edge factories (A, B, C) participating in FedAvg coordination.
-Displays communication round convergence, local losses, and Centralized vs Federated efficacy.
+Page 5: Federated Learning Monitor for XAI for IOT Anomaly Detection.
+Monitors multi-factory FedAvg training, client weight divergence,
+communication efficiency, and centralized vs federated performance parity.
 """
 
 import os
@@ -12,7 +12,7 @@ import streamlit as st
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 
-st.set_page_config(page_title="Federated Learning | CEdge-XAI", layout="wide", page_icon="🌐")
+st.set_page_config(page_title="Federated Learning | XAI for IOT Anomaly Detection", layout="wide", page_icon="🌐")
 st.title("🌐 Decentralized Federated Edge Learning (FedAvg)")
 
 st.markdown(

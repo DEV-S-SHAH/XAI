@@ -1,5 +1,5 @@
 """
-Unit Tests for Detection Models in CEdge-XAI.
+Unit Tests for Detection Models in XAI for IOT Anomaly Detection.
 Tests LSTM-AE, Isolation Forest, One-Class SVM, Anomaly Transformer, and ONNX Runtime.
 """
 

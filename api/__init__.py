@@ -1,1 +1,1 @@
-"""CEdge-XAI FastAPI Service Package."""
+"""XAI for IOT Anomaly Detection FastAPI Service Package."""

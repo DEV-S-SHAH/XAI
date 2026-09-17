@@ -206,7 +206,7 @@ class CausalGraphEngine:
         nx.draw_networkx_edge_labels(self.graph, pos, edge_labels=edge_labels, font_size=8)
 
         plt.title(
-            "CEdge-XAI: Directed Causal Sensor Graph (Tigramite PCMCI)",
+            "XAI for IOT Anomaly Detection: Directed Causal Sensor Graph (Tigramite PCMCI)",
             fontsize=13,
             fontweight="bold",
             pad=15,
@@ -275,7 +275,7 @@ CausalDiscoveryEngine = CausalGraphEngine
 
 if __name__ == "__main__":
     print("=" * 65)
-    print("CEdge-XAI: TIGRAMITE PCMCI CAUSAL DISCOVERY")
+    print("XAI for IOT Anomaly Detection: TIGRAMITE PCMCI CAUSAL DISCOVERY")
     print("=" * 65)
     engine = CausalGraphEngine(config_path="config/config.yaml")
     g = engine.discover_causal_links(

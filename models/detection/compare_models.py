@@ -1,4 +1,4 @@
-"""Model Comparison and Evaluation for CEdge-XAI across 4 detectors, generating tables and curves."""
+"""Model Comparison and Evaluation for XAI for IOT Anomaly Detection across 4 detectors, generating tables and curves."""
 
 import argparse
 import logging
@@ -186,7 +186,7 @@ def evaluate_all_models(
     print(
         "\n"
         + "=" * 80
-        + "\nCEdge-XAI: BENCHMARK EVALUATION OF ANOMALY DETECTION ARCHITECTURES\n"
+        + "\nXAI for IOT Anomaly Detection: BENCHMARK EVALUATION OF ANOMALY DETECTION ARCHITECTURES\n"
         + "=" * 80
     )
     print(df_results.to_string(index=False) + "\n" + "=" * 80 + "\n")

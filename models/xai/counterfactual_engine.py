@@ -54,7 +54,7 @@ FEATURE_LABELS = {f: f.replace("_", " ").title() for f in FEATURE_NAMES}
 
 
 class CounterfactualEngine:
-    """Physics-Aware and Optimization-Based Counterfactual Engine for CEdge-XAI."""
+    """Physics-Aware and Optimization-Based Counterfactual Engine for XAI for IOT Anomaly Detection."""
 
     def __init__(
         self,
@@ -255,7 +255,7 @@ if __name__ == "__main__":
     from models.detection.train import prepare_dataset
 
     print("=" * 65)
-    print("CEdge-XAI: COUNTERFACTUAL EXPLANATION VERIFICATION")
+    print("XAI for IOT Anomaly Detection: COUNTERFACTUAL EXPLANATION VERIFICATION")
     print("=" * 65)
     engine = CounterfactualEngine(config_path="config/config.yaml")
     data_pkg = prepare_dataset(csv_path="data/synthetic/factory_iot_data.csv")

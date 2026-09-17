@@ -1,5 +1,5 @@
 """
-Explanation Formatter for CEdge-XAI.
+Explanation Formatter for XAI for IOT Anomaly Detection.
 Synthesizes physics-aware counterfactual insights, causal propagation chains,
 and sensor domain context into human-readable narratives, structured JSON payloads,
 and publication comparison tables (Tables 3 & 4).
@@ -230,7 +230,7 @@ class ExplanationFormatter:
                     "SHAP Correct Root Cause?": (
                         "Yes" if shap_cause == true_cause else "No (Symptoms Confused)"
                     ),
-                    "CEdge-XAI Correct Root Cause?": "Yes (Intervention Target Found)",
+                    "XAI for IOT Anomaly Detection Correct Root Cause?": "Yes (Intervention Target Found)",
                 }
             )
 

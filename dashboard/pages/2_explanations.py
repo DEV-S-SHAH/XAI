@@ -1,5 +1,5 @@
 """
-Page 3: Explainable AI & Counterfactual Reasoning for CEdge-XAI.
+Page 3: Explainable AI & Counterfactual Reasoning for XAI for IOT Anomaly Detection.
 Provides side-by-side original vs counterfactual sensor values, required interventions,
 Method 1 (Clamping) vs Method 2 (Gradient Descent) comparison, and SHAP baseline comparison.
 """
@@ -16,12 +16,12 @@ from models.xai.explanation_formatter import (  # noqa: E402
     SCENARIO_GROUND_TRUTH,
 )
 
-st.set_page_config(page_title="Counterfactual XAI | CEdge-XAI", layout="wide", page_icon="🔍")
+st.set_page_config(page_title="Counterfactual XAI | XAI for IOT Anomaly Detection", layout="wide", page_icon="🔍")
 st.title("🔍 Explainable AI: Counterfactuals & Root Cause Attribution")
 
 st.markdown(
     "Traditional XAI (e.g. SHAP) highlights correlated symptom sensors. "
-    "**CEdge-XAI** answers: *'What is the minimal physical intervention required to return this machine to normal?'*"
+    "**XAI for IOT Anomaly Detection** answers: *'What is the minimal physical intervention required to return this machine to normal?'*"
 )
 
 # Scenario Selector
@@ -60,22 +60,22 @@ with col_b:
             {
                 "Criterion": "Identified Variable",
                 "SHAP Baseline": shap_cause,
-                "CEdge-XAI (Ours)": true_cause,
+                "XAI for IOT (Ours)": true_cause,
             },
             {
                 "Criterion": "Physical Veracity",
                 "SHAP Baseline": "❌ Symptom (Heat/Vibration)",
-                "CEdge-XAI (Ours)": "✅ True Root Cause",
+                "XAI for IOT (Ours)": "✅ True Root Cause",
             },
             {
                 "Criterion": "Actionable Guidance",
                 "SHAP Baseline": "None (Just Attribution Score)",
-                "CEdge-XAI (Ours)": "Specific Parameter Restoration",
+                "XAI for IOT (Ours)": "Specific Parameter Restoration",
             },
             {
                 "Criterion": "Physical Plausibility",
                 "SHAP Baseline": "Low (Violates Law of Physics)",
-                "CEdge-XAI (Ours)": "Guaranteed by Clamping Bounds",
+                "XAI for IOT (Ours)": "Guaranteed by Clamping Bounds",
             },
         ]
     )
@@ -198,13 +198,13 @@ with tab2:
             """)
 
 with tab3:
-    st.subheader("Attribution Visualizations (SHAP vs CEdge-XAI)")
+    st.subheader("Attribution Visualizations (SHAP vs Counterfactuals)")
     fig_col1, fig_col2 = st.columns(2)
     with fig_col1:
         if os.path.exists("paper_assets/figures/xai_comparison.png"):
             st.image(
                 "paper_assets/figures/xai_comparison.png",
-                caption="Figure: SHAP Feature Attribution vs CEdge-XAI Counterfactual Impact",
+                caption="Figure: SHAP Feature Attribution vs Counterfactual Impact",
             )
     with fig_col2:
         if os.path.exists("paper_assets/figures/shap_summary.png"):

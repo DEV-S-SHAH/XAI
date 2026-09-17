@@ -1,5 +1,5 @@
 """
-Isolation Forest Anomaly Detection Model for CEdge-XAI.
+Isolation Forest Anomaly Detection Model for XAI for IOT Anomaly Detection.
 Unsupervised tree-based anomaly detection baseline.
 """
 

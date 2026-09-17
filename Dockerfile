@@ -1,5 +1,5 @@
 # ==============================================================================
-# Dockerfile for CEdge-XAI: Real-Time IoT Anomaly Detection Platform
+# Dockerfile for XAI for IOT Anomaly Detection Platform
 # Multi-stage production container supporting FastAPI, Streamlit, and Flower FL
 # ==============================================================================
 

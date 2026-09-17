@@ -1,4 +1,4 @@
-Anomaly ID,Scenario,SHAP Top Attribution,Our Counterfactual,SHAP Correct Root Cause?,CEdge-XAI Correct Root Cause?
+Anomaly ID,Scenario,SHAP Top Attribution,Our Counterfactual,SHAP Correct Root Cause?,XAI for IOT Anomaly Detection Correct Root Cause?
 A1,A1_Fan_Failure,motor_temp,"IF fan_speed set to normal, anomaly score reduces to baseline.",No (Symptoms Confused),Yes (Intervention Target Found)
 A2,A2_Lubrication_Leak,vibration,"IF lubrication_flow set to normal, anomaly score reduces to baseline.",No (Symptoms Confused),Yes (Intervention Target Found)
 A3,A3_Heatwave,motor_temp,"IF ambient_temp set to normal, anomaly score reduces to baseline.",No (Symptoms Confused),Yes (Intervention Target Found)

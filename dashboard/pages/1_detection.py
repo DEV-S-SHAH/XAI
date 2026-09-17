@@ -1,5 +1,5 @@
 """
-Page 2: Real-Time Anomaly Detection for CEdge-XAI.
+Page 2: Real-Time Anomaly Detection for XAI for IOT Anomaly Detection.
 Simulates live sensor telemetry streaming, displays detection alerts,
 and renders real-time anomaly scores vs calibrated threshold.
 """
@@ -15,7 +15,7 @@ import yaml
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 
-st.set_page_config(page_title="Real-Time Detection | CEdge-XAI", layout="wide", page_icon="⚡")
+st.set_page_config(page_title="Real-Time Detection | XAI for IOT Anomaly Detection", layout="wide", page_icon="⚡")
 st.title("⚡ Real-Time Edge Anomaly Detection Timeline")
 
 CSV_PATH = "data/synthetic/factory_iot_data.csv"

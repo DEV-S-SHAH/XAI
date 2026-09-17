@@ -1,1 +1,1 @@
-"""CEdge-XAI Explainable AI and Causal Attribution Subpackage."""
+"""XAI for IOT Anomaly Detection Explainable AI and Causal Attribution Subpackage."""

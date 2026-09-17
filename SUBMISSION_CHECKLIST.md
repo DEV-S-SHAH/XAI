@@ -1,6 +1,6 @@
-# CEdge-XAI Submission Checklist
+# XAI for IOT Anomaly Detection Submission Checklist
 
-This document verifies the completion and validation status of all required deliverables for the **CEdge-XAI: Real-Time Edge-Cloud Anomaly Detection and Root Cause Attribution for Industrial IoT** project.
+This document verifies the completion and validation status of all required deliverables for the **XAI for IOT Anomaly Detection** project.
 
 ---
 
@@ -45,7 +45,7 @@ This document verifies the completion and validation status of all required deli
 
 - [x] **Deliverable 6: All 15 Figures as PNG**
   - Location: `paper_assets/figures/` (Publication-grade 300 DPI, 50KB–2MB each)
-  1. `architecture.png` — CEdge-XAI Split-Brain dual-engine architecture
+  1. `architecture.png` — XAI for IOT Anomaly Detection Split-Brain dual-engine architecture
   2. `dataset_overview.png` — Multivariate telemetry across normal and failure windows
   3. `roc_curves.png` — Receiver Operating Characteristic curves across all 4 models
   4. `pr_curves.png` — Precision-Recall curves across all 4 models

@@ -96,7 +96,7 @@ dashboard:
   port: 8501
 
 mlflow:
-  experiment_name: "CEdge-XAI"
+  experiment_name: "XAI for IOT Anomaly Detection"
   tracking_uri: "sqlite:///experiments/mlruns.db"
 
 paths:

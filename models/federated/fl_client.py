@@ -1,5 +1,5 @@
 """
-Federated Learning Client for CEdge-XAI.
+Federated Learning Client for XAI for IOT Anomaly Detection.
 Simulates an industrial edge node (Factory A/B/C).
 Trains local LSTM-Autoencoder weights without ever transferring raw sensor telemetry.
 Generates XAI explanations locally on-device.
