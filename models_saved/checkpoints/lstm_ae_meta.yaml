@@ -1,0 +1,16 @@
+features:
+- ambient_temp
+- ambient_humidity
+- fan_speed
+- lubrication_flow
+- motor_temp
+- spindle_speed
+- vibration
+- acoustic_emission
+- power_draw
+- tool_wear
+hidden_dim: 64
+input_dim: 10
+threshold: 0.1256681733932288
+val_f1: 1.0
+window_size: 60

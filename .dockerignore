@@ -1,0 +1,10 @@
+__pycache__
+*.pyc
+.git
+notebooks/
+mlruns/
+data/real/raw/
+*.log
+.env
+cedge_xai_env/
+.pytest_cache/

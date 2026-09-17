@@ -1,0 +1,8 @@
+Anomaly ID,True Root Cause,Predicted Root Cause,Match?,Impact Score
+A1,fan_speed,fan_speed,YES (100%),0.847
+A2,lubrication_flow,lubrication_flow,YES (100%),0.806
+A3,ambient_temp,ambient_temp,YES (100%),0.893
+A4,vibration,vibration,YES (100%),0.86
+A5,spindle_speed,spindle_speed,YES (100%),0.84
+A6,ambient_temp,ambient_temp,YES (100%),0.773
+A7,fan_speed,fan_speed,YES (100%),0.773

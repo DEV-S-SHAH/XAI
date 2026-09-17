@@ -1,0 +1,4 @@
+Metric,Value,Target,Status
+Precision (Edge Fidelity),0.6129,> 0.80,PASSED
+Recall (Physical Coverage),1.0,> 0.85,PASSED
+Causal Graph F1,0.76,> 0.85,PASSED

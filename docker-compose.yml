@@ -1,0 +1,56 @@
+services:
+  # Service 1: Split-Brain Edge & Explanation Server (FastAPI + Uvicorn)
+  edge-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cedge-xai-edge-server
+    command: uvicorn api.main:app --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models_saved:/app/models_saved
+      - ./data:/app/data
+      - ./paper_assets:/app/paper_assets
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Service 2: Interactive Streamlit Demonstration Dashboard
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cedge-xai-dashboard
+    command: streamlit run dashboard/app.py --server.port 8501 --server.headless true
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data:/app/data
+      - ./paper_assets:/app/paper_assets
+      - ./models_saved:/app/models_saved
+    depends_on:
+      - edge-server
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+
+  # Service 3: Federated Learning Simulation Runner (Flower)
+  federated-simulation:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cedge-xai-fl-sim
+    command: python models/federated/fl_server.py --rounds 5
+    volumes:
+      - ./models_saved:/app/models_saved
+      - ./paper_assets:/app/paper_assets
+      - ./data:/app/data
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: "no"

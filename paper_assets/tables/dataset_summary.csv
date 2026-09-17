@@ -1,0 +1,12 @@
+Metric,Value
+Duration,3 Days (72 Hours)
+Sampling Rate,1 Reading / Minute
+Total Observations,4320
+Sensor Channels,10
+Normal Samples,4147 (96.0%)
+Anomalous Samples,173 (4.0%)
+A1 (Fan Failure),35 minutes
+A2 (Lubrication Leak),35 minutes
+A3 (Heatwave),40 minutes
+A4 (Sensor Glitch),25 minutes
+A5 (Spindle Overload),38 minutes

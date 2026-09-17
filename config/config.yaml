@@ -1,0 +1,107 @@
+seed: 42
+
+data:
+  duration_days: 3
+  sample_rate_min: 1
+  total_rows: 4320
+  features:
+    - ambient_temp
+    - ambient_humidity
+    - fan_speed
+    - lubrication_flow
+    - motor_temp
+    - spindle_speed
+    - vibration
+    - acoustic_emission
+    - power_draw
+    - tool_wear
+  target_column: "anomaly"
+  timestamp_column: "timestamp"
+  anomaly_ratio: 0.04
+  synthetic_csv: "data/synthetic/factory_iot_data.csv"
+  real_csv: "data/real/ai4i_2020_preprocessed.csv"
+
+preprocessing:
+  train_ratio: 0.70
+  val_ratio: 0.15
+  test_ratio: 0.15
+  window_size: 60
+  stride: 1
+  scaler_path: "models_saved/checkpoints/scaler.joblib"
+
+models:
+  lstm_ae:
+    input_dim: 10
+    hidden_dim: 64
+    num_layers: 2
+    dropout: 0.1
+    learning_rate: 0.001
+    batch_size: 32
+    epochs: 50
+    patience: 10
+    checkpoint_path: "models_saved/checkpoints/lstm_ae_best.pt"
+
+  isolation_forest:
+    n_estimators: 200
+    contamination: 0.04
+    checkpoint_path: "models_saved/checkpoints/isolation_forest.joblib"
+
+  one_class_svm:
+    kernel: "rbf"
+    gamma: "scale"
+    nu: 0.04
+    checkpoint_path: "models_saved/checkpoints/one_class_svm.joblib"
+
+  anomaly_transformer:
+    input_dim: 10
+    d_model: 64
+    n_heads: 4
+    ff_dim: 128
+    num_layers: 2
+    learning_rate: 0.0001
+    batch_size: 32
+    epochs: 20
+    checkpoint_path: "models_saved/checkpoints/anomaly_transformer.pt"
+
+xai:
+  counterfactual:
+    lr: 0.01
+    steps: 300
+    lambda_dist: 0.1
+  causal:
+    tau_max: 3
+    alpha: 0.01
+  shap:
+    background_samples: 50
+    test_samples: 10
+
+federated:
+  num_clients: 3
+  rounds: 5
+  local_epochs: 2
+  batch_size: 32
+  server_address: "127.0.0.1:8080"
+  global_checkpoint: "models_saved/checkpoints/fl_global_lstm_ae.pt"
+
+edge:
+  onnx_fp32: "models_saved/onnx/lstm_ae_fp32.onnx"
+  onnx_int8: "models_saved/quantized/lstm_ae_int8.onnx"
+  benchmark_iterations: 1000
+
+api:
+  host: "0.0.0.0"
+  port: 8000
+
+dashboard:
+  port: 8501
+
+mlflow:
+  experiment_name: "CEdge-XAI"
+  tracking_uri: "sqlite:///experiments/mlruns.db"
+
+paths:
+  checkpoints_dir: "models_saved/checkpoints"
+  paper_tables: "paper_assets/tables"
+  paper_figures: "paper_assets/figures"
+  results_dir: "paper_assets/tables"
+  figures_dir: "paper_assets/figures"

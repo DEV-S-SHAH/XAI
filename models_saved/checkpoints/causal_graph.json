@@ -1,0 +1,142 @@
+{
+  "nodes": [
+    "ambient_temp",
+    "ambient_humidity",
+    "fan_speed",
+    "lubrication_flow",
+    "motor_temp",
+    "spindle_speed",
+    "vibration",
+    "acoustic_emission",
+    "power_draw",
+    "tool_wear"
+  ],
+  "edges": [
+    {
+      "source": "ambient_temp",
+      "target": "ambient_humidity",
+      "weight": 0.159,
+      "lag": 1,
+      "p_value": 0.0
+    },
+    {
+      "source": "ambient_temp",
+      "target": "fan_speed",
+      "weight": 0.102,
+      "lag": 1,
+      "p_value": 0.0
+    },
+    {
+      "source": "ambient_temp",
+      "target": "motor_temp",
+      "weight": 0.72,
+      "lag": 1,
+      "p_value": 0.001
+    },
+    {
+      "source": "fan_speed",
+      "target": "motor_temp",
+      "weight": 0.057,
+      "lag": 2,
+      "p_value": 0.00025637630181545154
+    },
+    {
+      "source": "fan_speed",
+      "target": "acoustic_emission",
+      "weight": 0.065,
+      "lag": 2,
+      "p_value": 3e-05
+    },
+    {
+      "source": "lubrication_flow",
+      "target": "vibration",
+      "weight": 0.81,
+      "lag": 1,
+      "p_value": 0.001
+    },
+    {
+      "source": "motor_temp",
+      "target": "spindle_speed",
+      "weight": 0.064,
+      "lag": 1,
+      "p_value": 4e-05
+    },
+    {
+      "source": "motor_temp",
+      "target": "vibration",
+      "weight": 0.14,
+      "lag": 1,
+      "p_value": 0.0
+    },
+    {
+      "source": "motor_temp",
+      "target": "power_draw",
+      "weight": 0.055,
+      "lag": 1,
+      "p_value": 0.00042
+    },
+    {
+      "source": "spindle_speed",
+      "target": "motor_temp",
+      "weight": 0.075,
+      "lag": 3,
+      "p_value": 1.5238610663137452e-06
+    },
+    {
+      "source": "spindle_speed",
+      "target": "vibration",
+      "weight": 0.144,
+      "lag": 2,
+      "p_value": 0.0
+    },
+    {
+      "source": "spindle_speed",
+      "target": "acoustic_emission",
+      "weight": 0.075,
+      "lag": 2,
+      "p_value": 0.0
+    },
+    {
+      "source": "spindle_speed",
+      "target": "power_draw",
+      "weight": 0.128,
+      "lag": 3,
+      "p_value": 1.2426337163555523e-16
+    },
+    {
+      "source": "spindle_speed",
+      "target": "tool_wear",
+      "weight": 0.074,
+      "lag": 1,
+      "p_value": 0.0
+    },
+    {
+      "source": "vibration",
+      "target": "tool_wear",
+      "weight": 0.155,
+      "lag": 1,
+      "p_value": 0.0
+    },
+    {
+      "source": "vibration",
+      "target": "acoustic_emission",
+      "weight": 0.88,
+      "lag": 1,
+      "p_value": 0.001
+    },
+    {
+      "source": "vibration",
+      "target": "power_draw",
+      "weight": 0.74,
+      "lag": 1,
+      "p_value": 0.001
+    },
+    {
+      "source": "power_draw",
+      "target": "tool_wear",
+      "weight": 0.053,
+      "lag": 3,
+      "p_value": 0.00064
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+Version,Size (MB),Latency (ms),RAM (MB)
+PyTorch FP32,0.464,1.246,380.73
+ONNX FP32,0.591,0.2,389.36
+ONNX INT8,0.589,0.203,389.72
