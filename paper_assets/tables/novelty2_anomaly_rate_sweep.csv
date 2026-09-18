@@ -1,0 +1,6 @@
+Anomaly_Rate_Pct,Total_Observations,Anomalies_Count,Baseline_E2E_Latency_ms,Proposed_E2E_Latency_ms,Latency_Speedup,Baseline_Data_TX_KB,Proposed_Data_TX_KB,Bandwidth_Savings_Pct,Avoided_XAI_Calls_Pct,Baseline_Energy_Joules_Est,Proposed_Energy_Joules_Est,Energy_Savings_Pct_Est
+1%,200,9,6.39,0.48,13.33x,546.9,26.1,95.2,95.5,83.15,4.02,95.2
+5%,200,20,6.45,0.82,7.89x,546.9,56.1,89.7,90.0,83.89,8.38,90.0
+10%,200,28,6.36,1.08,5.88x,546.9,77.9,85.8,86.0,82.74,11.8,85.7
+20%,200,46,6.55,1.63,4.01x,546.9,127.0,76.8,77.0,85.24,18.87,77.9
+50%,200,101,6.49,3.4,1.91x,546.9,276.9,49.4,49.5,84.39,41.77,50.5

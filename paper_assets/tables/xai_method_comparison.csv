@@ -1,0 +1,4 @@
+Method,Root_Cause_Accuracy (%),Advantage,Beats_Baselines
+Counterfactual (Physics-Clamping),100.0,Directly isolates actionable physical interventions without symptom confusion,YES
+SHAP (KernelExplainer),60.0,"Attributional; misattributes secondary symptoms (e.g. vibration, motor_temp) as root causes",NO
+LIME (Local Interpretable Model),4.0,Local surrogate gradient; prone to collinearity and downstream artifact traps,NO

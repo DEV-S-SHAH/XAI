@@ -1,0 +1,6 @@
+Paradigm,Data_Locality,Precision,Recall,F1_Score,ROC_AUC,PR_AUC,Comm_Bytes_MB,Training_Time_s,Privacy_Preserved
+Centralized Training (Upper Bound),Raw Data Pooled Centrally,1.0000 ± 0.0000,0.9885 ± 0.0000,0.9942 ± 0.0000,1.0000 ± 0.0000,1.0000 ± 0.0000,0.0,26.19,NO (Data Pooled)
+Local-Only: Factory A (No Federation),Factory A Data Only,1.0000 ± 0.0000,0.9885 ± 0.0000,0.9942 ± 0.0000,1.0000 ± 0.0000,1.0000 ± 0.0000,0.0,12.37,YES (Isolated)
+Local-Only: Factory B (No Federation),Factory B Data Only,1.0000 ± 0.0000,0.9885 ± 0.0000,0.9942 ± 0.0000,1.0000 ± 0.0000,1.0000 ± 0.0000,0.0,12.37,YES (Isolated)
+Local-Only: Factory C (No Federation),Factory C Data Only,1.0000 ± 0.0000,0.9885 ± 0.0000,0.9942 ± 0.0000,1.0000 ± 0.0000,1.0000 ± 0.0000,0.0,12.37,YES (Isolated)
+"Federated Learning (FedAvg, 10 Rounds)",Decentralized (Model Weights Only),1.0000 ± 0.0000,0.9885 ± 0.0000,0.9942 ± 0.0000,1.0000 ± 0.0000,1.0000 ± 0.0000,13.729999999999999,38.11,YES (Verified Zero Raw Data)

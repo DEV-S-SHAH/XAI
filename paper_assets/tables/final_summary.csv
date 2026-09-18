@@ -1,0 +1,12 @@
+Metric,Value,Target,Status
+Root Cause Accuracy,100.0%,> 90.0%,PASSED
+Faithfulness Rate,100.0%,> 50% drop,PASSED
+Validity Rate,100.0%,Score < Threshold,PASSED
+Mean Sparsity,4.01 features,Minimal perturbation,PASSED
+Explanation Latency,4.87 ms,< 200 ms,PASSED
+Edge Latency INT8,0.177 ms,< 5 ms,PASSED
+Model Size INT8,0.193 MB,>= 3x smaller,PASSED
+Federated F1-Score,0.9942 ± 0.0000,Within 2% of Centralized,PASSED
+Centralized F1-Score,0.9942 ± 0.0000,Upper Bound Benchmark,PASSED
+Causal Graph Precision,81.82%,> 80.0%,PASSED
+Causal Graph Recall,60.00%,Physical Coverage,PASSED

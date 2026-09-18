@@ -42,7 +42,7 @@ def get_current_ram_mb() -> float:
 def benchmark_pytorch_fp32(
     checkpoint_path: str, config: Dict, num_iterations: int = 1000
 ) -> Dict[str, float]:
-    """Benchmark PyTorch FP32 model."""
+    """Benchmark PyTorch FP32 model with mean and p95 latency."""
     logger.info("Benchmarking PyTorch FP32 model...")
     cfg_m = config["models"]["lstm_ae"]
     model = LSTMAutoencoder(
@@ -60,18 +60,21 @@ def benchmark_pytorch_fp32(
         with torch.no_grad():
             _ = model(sample)
 
-    t0 = time.perf_counter()
+    latencies = []
     with torch.no_grad():
         for _ in range(num_iterations):
+            t_start = time.perf_counter()
             _ = model(sample)
-    t1 = time.perf_counter()
+            latencies.append((time.perf_counter() - t_start) * 1000.0)
 
-    avg_ms = ((t1 - t0) / num_iterations) * 1000.0
+    avg_ms = float(np.mean(latencies))
+    p95_ms = float(np.percentile(latencies, 95))
     size_mb = os.path.getsize(checkpoint_path) / (1024 * 1024)
     return {
         "Version": "PyTorch FP32",
         "Size (MB)": round(size_mb, 3),
         "Latency (ms)": round(avg_ms, 3),
+        "Latency P95 (ms)": round(p95_ms, 3),
         "RAM (MB)": round(get_current_ram_mb(), 2),
     }
 
@@ -79,7 +82,7 @@ def benchmark_pytorch_fp32(
 def benchmark_onnx(
     onnx_path: str, version_name: str, config: Dict, num_iterations: int = 1000
 ) -> Dict[str, float]:
-    """Benchmark ONNX Runtime model (FP32 or INT8)."""
+    """Benchmark ONNX Runtime model (FP32 or INT8) with mean and p95 latency."""
     logger.info(f"Benchmarking {version_name} onnxruntime session...")
     session = ort.InferenceSession(onnx_path, providers=["CPUExecutionProvider"])
     inp_name = session.get_inputs()[0].name
@@ -90,17 +93,20 @@ def benchmark_onnx(
     for _ in range(50):
         _ = session.run(None, {inp_name: sample})
 
-    t0 = time.perf_counter()
+    latencies = []
     for _ in range(num_iterations):
+        t_start = time.perf_counter()
         _ = session.run(None, {inp_name: sample})
-    t1 = time.perf_counter()
+        latencies.append((time.perf_counter() - t_start) * 1000.0)
 
-    avg_ms = ((t1 - t0) / num_iterations) * 1000.0
+    avg_ms = float(np.mean(latencies))
+    p95_ms = float(np.percentile(latencies, 95))
     size_mb = os.path.getsize(onnx_path) / (1024 * 1024)
     return {
         "Version": version_name,
         "Size (MB)": round(size_mb, 3),
         "Latency (ms)": round(avg_ms, 3),
+        "Latency P95 (ms)": round(p95_ms, 3),
         "RAM (MB)": round(get_current_ram_mb(), 2),
     }
 

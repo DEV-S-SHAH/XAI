@@ -26,18 +26,86 @@ def quantize_onnx_model(
     input_onnx_path: str = "models_saved/onnx/lstm_ae_fp32.onnx",
     output_onnx_path: str = "models_saved/quantized/lstm_ae_int8.onnx",
 ) -> str:
-    """Apply dynamic INT8 quantization to ONNX FP32 model."""
+    """Apply dynamic INT8 quantization to ONNX FP32 model including LSTM layers."""
     if not os.path.exists(input_onnx_path):
         raise FileNotFoundError(f"Input ONNX file not found: {input_onnx_path}")
 
     os.makedirs(os.path.dirname(output_onnx_path), exist_ok=True)
     logger.info(f"Quantizing ONNX model {input_onnx_path} to INT8: {output_onnx_path}...")
 
+    import onnx
+    from onnx import numpy_helper
+
+    # Fold constant slice/concat/unsqueeze operations so LSTM weight tensors become direct initializers
+    model = onnx.load(input_onnx_path)
+    init_map = {init.name: numpy_helper.to_array(init) for init in model.graph.initializer}
+
+    changed = True
+    while changed:
+        changed = False
+        new_nodes = []
+        for node in model.graph.node:
+            if node.op_type in ["Slice", "Concat", "Unsqueeze", "Reshape", "Transpose"] and all(
+                inp in init_map for inp in node.input if inp != ""
+            ):
+                sub_inputs = [
+                    onnx.helper.make_tensor_value_info(
+                        i,
+                        onnx.TensorProto.FLOAT if init_map[i].dtype == np.float32 else onnx.TensorProto.INT64,
+                        list(init_map[i].shape),
+                    )
+                    for i in node.input
+                    if i != ""
+                ]
+                sub_outputs = [
+                    onnx.helper.make_tensor_value_info(
+                        o,
+                        onnx.TensorProto.FLOAT if any(init_map[i].dtype == np.float32 for i in node.input if i != "") else onnx.TensorProto.INT64,
+                        None,
+                    )
+                    for o in node.output
+                ]
+                sub_graph = onnx.helper.make_graph(
+                    [node],
+                    "sub",
+                    sub_inputs,
+                    sub_outputs,
+                    [numpy_helper.from_array(init_map[i], name=i) for i in node.input if i != ""],
+                )
+                sub_model = onnx.helper.make_model(sub_graph, opset_imports=model.opset_import)
+                sess = ort.InferenceSession(sub_model.SerializeToString())
+                feed = {i: init_map[i] for i in node.input if i != ""}
+                res = sess.run(None, feed)
+                for out_name, val in zip(node.output, res):
+                    init_map[out_name] = val
+                    model.graph.initializer.append(numpy_helper.from_array(val, name=out_name))
+                changed = True
+            else:
+                new_nodes.append(node)
+        model.graph.ClearField("node")
+        model.graph.node.extend(new_nodes)
+
+    used_inputs = set()
+    for node in model.graph.node:
+        for i in node.input:
+            used_inputs.add(i)
+    model.graph.ClearField("initializer")
+    for name, arr in init_map.items():
+        if name in used_inputs:
+            model.graph.initializer.append(numpy_helper.from_array(arr, name=name))
+
+    folded_temp_path = output_onnx_path + ".folded.onnx"
+    onnx.save(model, folded_temp_path)
+
     quantize_dynamic(
-        model_input=input_onnx_path,
+        model_input=folded_temp_path,
         model_output=output_onnx_path,
         weight_type=QuantType.QInt8,
+        op_types_to_quantize=["LSTM", "MatMul", "Gemm"],
     )
+
+    if os.path.exists(folded_temp_path):
+        os.remove(folded_temp_path)
 
     size_fp32 = os.path.getsize(input_onnx_path) / (1024 * 1024)
     size_int8 = os.path.getsize(output_onnx_path) / (1024 * 1024)
@@ -45,7 +113,7 @@ def quantize_onnx_model(
 
     logger.info(
         f"ONNX Quantization complete: {size_fp32:.3f} MB -> {size_int8:.3f} MB "
-        f"({compression:.1f}% size reduction)"
+        f"({compression:.1f}% size reduction, {size_fp32/size_int8:.2f}x compression)"
     )
 
     # Validate INT8 ONNX Session

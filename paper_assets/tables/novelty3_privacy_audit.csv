@@ -1,0 +1,4 @@
+Client_Name,Payload_Type,Transmitted_Param_Tensors,Payload_Size_Bytes,Payload_Size_KB,Raw_Data_Exposed,Privacy_Audit_Passed
+Factory_A,Model_Weights_Only (FedAvg),18,479784,468.54,False,True
+Factory_B,Model_Weights_Only (FedAvg),18,479784,468.54,False,True
+Factory_C,Model_Weights_Only (FedAvg),18,479784,468.54,False,True

@@ -1,0 +1,11 @@
+Metric,Value,Unit,Target,Status
+Edge Detection Latency (ONNX INT8),0.182,ms,< 5.0 ms,PASSED
+Edge Detection P95 Latency,0.214,ms,< 5.0 ms,PASSED
+Server Explanation Latency,4.234,ms,< 200.0 ms,PASSED
+Server Explanation P95 Latency,4.293,ms,< 200.0 ms,PASSED
+Total Ingestion Timesteps,4320.0,minutes,Full Dataset,PASSED
+Detected Anomaly Count,173.0,events,4.0% ratio,PASSED
+Continuous Baseline Total Time,19.08,seconds,Reference,PASSED
+Split-Brain Ingestion Total Time,1.52,seconds,Optimized,PASSED
+Total Resource Savings,92.05,%,> 90.0% Saved,PASSED
+Explanation Calls Avoided,96.0,%,Normal Windows Filtered,PASSED

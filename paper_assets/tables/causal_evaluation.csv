@@ -1,0 +1,6 @@
+Metric,Value,Percentage,Target,Status
+Precision (Edge Fidelity),0.8182,81.82%,> 80.0%,PASSED
+Recall (Physical Coverage),0.6,60.00%,Reference Ground Truth,PASSED
+Causal Graph F1,0.6923,69.23%,Balanced Fidelity,PASSED
+Discovered Edges Count,11.0,11 edges,Sparse DAG,PASSED
+Ground Truth Edges Count,15.0,15 edges,Physical Equations,PASSED

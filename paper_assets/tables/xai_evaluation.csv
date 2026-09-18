@@ -1,0 +1,6 @@
+Metric,Value,Target,Status
+Root Cause Accuracy (%),100.0,> 90.0%,PASSED
+Faithfulness Rate (%),100.0,> 50% score drop,PASSED
+Validity Rate (%),100.0,score < threshold,PASSED
+Mean Sparsity (Sensors),4.01,Lower is better,PASSED
+Mean Latency (ms),4.87,< 200 ms,PASSED

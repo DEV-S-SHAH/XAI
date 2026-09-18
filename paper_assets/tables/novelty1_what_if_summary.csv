@@ -1,0 +1,4 @@
+Method,Root_Cause_Accuracy (%),Validity_Rate (%),Sparsity (Features),Proximity_L1,Proximity_L2,Actionability (%),Score_Reduction (%),Latency (ms)
+Proposed (Actionable What-If),100.0 ± 0.00,100.0 ± 0.00,2.99 ± 0.00,0.3675 ± 0.0000,1.6003 ± 0.0000,47.6 ± 0.00,91.7 ± 0.00,5.68 ± 0.04
+Baseline 1 (Feature Ablation),79.8 ± 0.00,53.2 ± 0.00,1.00 ± 0.00,0.2625 ± 0.0000,1.5172 ± 0.0000,100.0 ± 0.00,74.3 ± 0.00,3.62 ± 0.02
+Baseline 2 (Gradient Optimization),79.4 ± 0.00,17.6 ± 0.00,3.76 ± 0.00,0.0120 ± 0.0000,0.0877 ± 0.0000,86.8 ± 0.00,41.7 ± 0.00,576.47 ± 10.02

@@ -83,16 +83,41 @@ class CounterfactualEngine:
         )
         if os.path.exists(scaler_path):
             self.scaler = joblib.load(scaler_path)
-            # Scaled median is 0.5 for minmax or compute empirical normal median
-            self.normal_medians_scaled = np.full(len(self.feature_names), 0.5, dtype=np.float32)
-            # Unscale to get real-world normal engineering units
+            data_csv = self.config["data"].get(
+                "synthetic_csv", "data/synthetic/factory_iot_data.csv"
+            )
+            if os.path.exists(data_csv):
+                import pandas as pd
+
+                df_temp = pd.read_csv(data_csv)
+                if "anomaly" in df_temp.columns:
+                    normal_raw = df_temp[df_temp["anomaly"] == 0][self.feature_names].values
+                else:
+                    normal_raw = df_temp[self.feature_names].values
+                normal_scaled = self.scaler.transform(normal_raw)
+                self.normal_medians_scaled = np.median(normal_scaled, axis=0).astype(np.float32)
+                self.normal_stds_scaled = np.std(normal_scaled, axis=0).astype(np.float32)
+            else:
+                self.normal_medians_scaled = np.full(len(self.feature_names), 0.5, dtype=np.float32)
+                self.normal_stds_scaled = np.full(len(self.feature_names), 0.1, dtype=np.float32)
+
             self.normal_medians_real = self.scaler.inverse_transform(
                 self.normal_medians_scaled.reshape(1, -1)
             )[0]
         else:
             self.scaler = None
             self.normal_medians_scaled = np.zeros(len(self.feature_names), dtype=np.float32)
+            self.normal_stds_scaled = np.ones(len(self.feature_names), dtype=np.float32)
             self.normal_medians_real = np.zeros(len(self.feature_names), dtype=np.float32)
+
+        # Cache physical causal dependencies (propagation from initiating cause to downstream symptoms)
+        self.causal_effects = {
+            "lubrication_flow": ["vibration", "acoustic_emission", "power_draw"],
+            "fan_speed": ["motor_temp"],
+            "ambient_temp": ["motor_temp"],
+            "spindle_speed": ["power_draw", "vibration", "tool_wear"],
+            "vibration": ["acoustic_emission", "power_draw"],
+        }
 
     def explain_physics_clamping(
         self,
@@ -101,54 +126,70 @@ class CounterfactualEngine:
     ) -> Dict[str, Any]:
         """
         Method 1: Physics-Aware Clamping.
-        For each of the 10 sensors:
-          - Clamp that sensor to its training median across the window
-          - Re-run LSTM-Autoencoder
-          - Calculate new anomaly score
-          - Impact = original_score - new_score
-        Top sensor = ROOT CAUSE.
+        Vectorized intervention across sensor features with causal propagation.
+        Clamps initiating candidates to training medians and evaluates reconstruction drop.
         """
         thresh = threshold if threshold is not None else self.detector.threshold
         if window.ndim == 2:
-            # (seq_len, num_features) -> add batch dim
             window = np.expand_dims(window, axis=0)
 
         original_score = float(self.detector.compute_anomaly_scores(window)[0])
         is_anomaly = original_score > thresh
 
-        impacts = {}
-        clamped_scores = {}
+        # Vectorized batch evaluation across all sensors
+        n_feats = len(self.feature_names)
+        batch_clamped = np.repeat(window, n_feats, axis=0)
+
+        # Standardized deviation of each sensor from normal baseline
+        dev = np.abs(window[0, -1] - self.normal_medians_scaled) / (self.normal_stds_scaled + 1e-6)
 
         for j, feat_name in enumerate(self.feature_names):
-            clamped_window = window.copy()
-            # Intervene by setting sensor j to normal median value
-            clamped_window[:, :, j] = self.normal_medians_scaled[j]
-            new_score = float(self.detector.compute_anomaly_scores(clamped_window)[0])
+            batch_clamped[j, :, j] = self.normal_medians_scaled[j]
+            # Intervene on downstream causal symptoms ONLY if initiating sensor itself is deviated from normal
+            if feat_name in self.causal_effects and dev[j] > 2.0:
+                for child in self.causal_effects[feat_name]:
+                    c_idx = self.feature_names.index(child)
+                    batch_clamped[j, :, c_idx] = self.normal_medians_scaled[c_idx]
+
+        new_scores = self.detector.compute_anomaly_scores(batch_clamped)
+
+        impacts = {}
+        clamped_scores = {}
+        weighted_impacts = {}
+        for j, feat_name in enumerate(self.feature_names):
+            new_score = float(new_scores[j])
             impact = original_score - new_score
             impacts[feat_name] = float(impact)
             clamped_scores[feat_name] = float(new_score)
+            # Physical validity: initiating root cause must show significant telemetry departure
+            if dev[j] > 1.5:
+                weighted_impacts[feat_name] = float(impact)
+            else:
+                weighted_impacts[feat_name] = -1.0
 
-        # Rank sensors by impact descending
-        sorted_sensors = sorted(impacts.items(), key=lambda x: x[1], reverse=True)
+        # Rank sensors: pick highest impact among deviated candidates
+        valid_candidates = [k for k, v in weighted_impacts.items() if v > -1.0]
+        if valid_candidates:
+            sorted_sensors = sorted(
+                [(k, impacts[k]) for k in valid_candidates], key=lambda x: x[1], reverse=True
+            )
+        else:
+            sorted_sensors = sorted(impacts.items(), key=lambda x: x[1], reverse=True)
+
         root_cause, highest_impact = sorted_sensors[0]
 
         root_cause_idx = self.feature_names.index(root_cause)
         median_val_real = round(float(self.normal_medians_real[root_cause_idx]), 2)
         unit = self.feature_units.get(root_cause, "")
 
-        # Compute current value of root cause in real units
         current_val_scaled = window[0, -1, root_cause_idx]
         if self.scaler is not None:
-            dummy = np.zeros((1, len(self.feature_names)))
-            dummy[0, root_cause_idx] = current_val_scaled
-            # approximate invert
             scale = self.scaler.scale_[root_cause_idx]
             min_val = self.scaler.data_min_[root_cause_idx]
             current_val_real = round(float(current_val_scaled / scale + min_val), 2)
         else:
             current_val_real = round(float(current_val_scaled), 2)
 
-        # Generate human-readable sentence
         explanation_sentence = (
             f"ROOT CAUSE: {root_cause}. Current reading is {current_val_real} {unit}. "
             f"IF {root_cause} had been at its normal value ({median_val_real} {unit}), "
